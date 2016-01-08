@@ -1,7 +1,7 @@
 player-router
 =============
 
-Minimal module for the broswer that handles hashtag routing for the Harvard DCE video player. (Currently only needs to handle seek-related routing.)
+Minimal module for the browser that handles hashtag routing for the Harvard DCE video player. (Currently only needs to handle seek-related routing.)
 
 Intended for use with Browserify.
 
