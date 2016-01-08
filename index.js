@@ -1,5 +1,3 @@
-var director = require('director');
-
 function initPlayerRouter(opts) {
   var seekParamName;
   var seekResponder;
