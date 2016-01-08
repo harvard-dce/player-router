@@ -52,6 +52,24 @@ var negativeCases = [
 positiveCases.forEach(runPositiveCaseTest);
 negativeCases.forEach(runNegativeCaseTest);
 
+test('Direct route test', function directTest(t) {
+  window.location.hash = 'st=101';
+
+  var router = initPlayerRouter({
+    seeking: {
+      seekParamName: 'st',
+      seekResponder: checkRouting
+    }
+  });
+
+  router.route();
+
+  function checkRouting(time) {
+    t.equal(time, 101, 'Correct time is passed to responder.');
+    t.end();
+  }
+});
+
 function runPositiveCaseTest(testCase) {
   test('Positive test', function positiveTest(t) {
     initPlayerRouter({

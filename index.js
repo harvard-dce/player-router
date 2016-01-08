@@ -29,7 +29,11 @@ function initPlayerRouter(opts) {
 
     // If more traditional routing was needed, this is where we would pass the
     // hash off to Director or another routing module.
-  }  
+  }
+
+  return {
+    route: route
+  };
 }
 
 module.exports = initPlayerRouter;

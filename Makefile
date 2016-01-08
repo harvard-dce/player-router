@@ -15,4 +15,4 @@ test-firefox:
 	$(BROWSERIFYCMD) tests/basictests.js | $(SMOKEFIREFOX)
 
 pushall:
-	git push origin master && npm publish
+	git push origin master && npm publish --access=public
