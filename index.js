@@ -16,13 +16,11 @@ function initPlayerRouter(opts) {
     if (segments.length > 0) {
       var lastSegment = segments[segments.length - 1];
       var paramAndValue = lastSegment.split('=');
-      if (paramAndValue.length === 2) {
-        if (paramAndValue[0] === seekParamName) {
-          var value = parseInt(paramAndValue[1], 10);
-          if (isNaN(value)) {
-            value = 0;
-          }
-          seekResponder(value);
+
+      if (paramAndValue.length === 2 && paramAndValue[0] === seekParamName) {
+        var rangeValue = parseRangeValue(paramAndValue[1]);
+        if (rangeValue.length > 0) {
+          seekResponder.apply(seekResponder, rangeValue);
         }
       }
     }
@@ -34,6 +32,25 @@ function initPlayerRouter(opts) {
   return {
     route: route
   };
+}
+
+function parseRangeValue(s) {
+  var value = [];
+  var startAndEnd = s.split('-');
+  if (startAndEnd.length > 0) {
+    var start = parseInt(startAndEnd[0], 10);
+    if (!isNaN(start)) {
+      value.push(start);
+
+      if (startAndEnd.length > 1) {
+        var end = parseInt(startAndEnd[1], 10);
+        if (!isNaN(end) && end > start) {
+          value.push(end);
+        }
+      }
+    }
+  }
+  return value;
 }
 
 module.exports = initPlayerRouter;

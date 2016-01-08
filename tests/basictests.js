@@ -8,44 +8,71 @@ var initPlayerRouter = require('../index');
 
 var positiveCases = [
   {
-    seekParamName: 'start',
-    hashLocation: 'start=10',
-    expected: 10
+    seekParamName: 'range',
+    hashLocation: 'range=10',
+    expectedStart: 10,
+    expectedEnd: undefined
   },
   {
-    seekParamName: 's',
-    hashLocation: 's=10',
-    expected: 10
+    seekParamName: 'range',
+    hashLocation: 'range=10-15',
+    expectedStart: 10,
+    expectedEnd: 15
   },
   {
-    seekParamName: 's',
-    hashLocation: 'whatever/something/s=20',
-    expected: 20
+    seekParamName: 't',
+    hashLocation: 't=10',
+    expectedStart: 10,
+    expectedEnd: undefined
   },
   {
-    seekParamName: 'start',
-    hashLocation: 'start=abcd20',
-    expected: 0
+    seekParamName: 't',
+    hashLocation: 't=10-900',
+    expectedStart: 10,
+    expectedEnd: 900
+  },
+  {
+    seekParamName: 't',
+    hashLocation: 'whatever/something/t=20',
+    expectedStart: 20,
+    expectedEnd: undefined
+  },
+  {
+    seekParamName: 't',
+    hashLocation: 'whatever/something/t=20-21',
+    expectedStart: 20,
+    expectedEnd: 21
   },
   {
     seekParamName: 'init',
-    hashLocation: 'next=hello/init=801',
-    expected: 801
+    hashLocation: 'next=hello/init=801-ab3',
+    expectedStart: 801,
+    expectedEnd: undefined
+  },
+  {
+    seekParamName: 'time',
+    hashLocation: 'next=hello/time=801-800',
+    expectedStart: 801,
+    expectedEnd: undefined
   }
 ];
 
 var negativeCases = [
   {
-    seekParamName: 'start',
+    seekParamName: 'range',
     hashLocation: ''
   },
   {
-    seekParamName: 'start',
+    seekParamName: 'range',
     hashLocation: 'nothingtodowithseek=50'
   },
   {
-    seekParamName: 's',
+    seekParamName: 't',
     hashLocation: 's=10/something-after'
+  },
+  {
+    seekParamName: 'range',
+    hashLocation: 'range=abcd20',
   }
 ];
 
@@ -81,8 +108,17 @@ function runPositiveCaseTest(testCase) {
 
     window.location.hash = testCase.hashLocation;
 
-    function checkRouting(time) {
-      t.equal(time, testCase.expected, 'Correct time is passed to responder.');
+    function checkRouting(startTime, endTime) {
+      t.equal(
+        startTime,
+        testCase.expectedStart,
+        'Correct start is passed to responder.'
+      );
+      t.equal(
+        endTime,
+        testCase.expectedEnd,
+        'Correct end is passed to responder.'
+      )
       t.end();
     }
   });

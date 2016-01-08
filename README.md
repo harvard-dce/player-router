@@ -18,21 +18,25 @@ Usage
 
     initPlayerRouter({
       seeking: {
-        seekParamName: 'start',
+        seekParamName: 'range',
         seekResponder: seekToTime
       }
     });
 
-    function seekToTime(time) {
-      mediaElement.currentTime = time;
+    function seekToTime(startTime, endTime) {
+      mediaElement.currentTime = startTime;
     }
 
-Now when the user goes to yourserver.com/yourpath#start=10 in the browser, `seekToTime` will be called with 10.
+Now when the user goes to yourserver.com/yourpath#range=10 in the browser, `seekToTime` will be called with 10 as the startTime.
+
+If the user goes to yourserver.com/yourpath#range=10-16, 10 and 16 will be passed to seekToTime.
 
 Tests
 -----
 
 Run tests with `make test`.
+
+Run Chrome tests with `make test-chrome` and run Firefox tests with `make test-firefox`.
 
 License
 -------
