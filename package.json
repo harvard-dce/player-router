@@ -1,6 +1,6 @@
 {
   "name": "@harvard-dce/player-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimal module for the browser that sends seeking parameters from a hashtag route to a callback.",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,5 @@
     "tap-closer": "^1.0.0",
     "tape": "^3.0.3"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
