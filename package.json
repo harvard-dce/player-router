@@ -1,5 +1,5 @@
 {
-  "name": "@harvard-dce/player-router",
+  "name": "dce-player-router",
   "version": "1.1.0",
   "description": "Minimal module for the browser that sends seeking parameters from a hashtag route to a callback.",
   "main": "index.js",
