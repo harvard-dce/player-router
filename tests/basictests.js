@@ -1,10 +1,22 @@
 var test = require('tape');
 var initPlayerRouter = require('../index');
 
+// Uncomment this if you want the test run to pause at the start so that you can
+// add breakpoints for debugging.
+
 // test('Pause', function pause(t) {
 //   console.log('Enter `c()` in the console to continue.');
 //   window.c = t.end;
 // });
+
+// These are the positive test cases, in which we expect the seekResponder to
+// be called.
+
+// seekParamName is the seekParamName passed to initPlayerRouter.
+// hashLocation is the what the hash part of the URL will be changed to in the
+// test. e.g. http://localhost:3000/#range=10
+// expectedStart is the start value that should be passed to the seekResponder.
+// expectedEnd is the start value that should be passed to the seekResponder.
 
 var positiveCases = [
   {
@@ -57,6 +69,13 @@ var positiveCases = [
   }
 ];
 
+// These are the negative test cases, in which we expect the seekResponder to
+// NOT be called.
+
+// seekParamName is the seekParamName passed to initPlayerRouter.
+// hashLocation is the what the hash part of the URL will be changed to in the
+// test. e.g. http://localhost:3000/#range=10
+
 var negativeCases = [
   {
     seekParamName: 'range',
@@ -79,6 +98,9 @@ var negativeCases = [
     hashLocation: '',
   }
 ];
+
+// This code executes the tests. It creates a router, then changes the hash of
+// the URL to trigger it, then makes assertions in the seekResponder.
 
 positiveCases.forEach(runPositiveCaseTest);
 negativeCases.forEach(runNegativeCaseTest);
