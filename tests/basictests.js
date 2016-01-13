@@ -73,6 +73,10 @@ var negativeCases = [
   {
     seekParamName: 'range',
     hashLocation: 'range=abcd20',
+  },
+  {
+    seekParamName: 'range',
+    hashLocation: '',
   }
 ];
 
@@ -133,9 +137,15 @@ function runNegativeCaseTest(testCase) {
       }
     });
 
-    window.location.hash = testCase.hashLocation;
+    t.doesNotThrow(
+      changeHash,
+      'Changing the hash to something bad does not cause an exception.'
+    );
 
-    setTimeout(pass, 0);
+    function changeHash() {
+      window.location.hash = testCase.hashLocation;
+      setTimeout(pass, 0);
+    }
 
     function checkRouting() {
       t.fail('Does not call responder because hash does not contain param.');
