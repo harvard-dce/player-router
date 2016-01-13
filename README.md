@@ -31,6 +31,12 @@ Now when the user goes to yourserver.com/yourpath#range=10 in the browser, `seek
 
 If the user goes to yourserver.com/yourpath#range=10-16, 10 and 16 will be passed to seekToTime.
 
+**initPlayerRouter** opts:
+
+- seeking: This object groups opts related to parsing seek-related URL components.
+    - seekParamName: The name of the seek parameter. If you want to use URLs like 'http://server.com/player#t=30', then you'd specify 't' here. If you want it to be 'http://server.com/player#t=starthere', then you'd specify 'starthere'.
+    - seekResponder: A function that will be called when the page is loaded or when the seek param value in the URL changes. It will be passed the (new) start time as a number.
+
 Tests
 -----
 
